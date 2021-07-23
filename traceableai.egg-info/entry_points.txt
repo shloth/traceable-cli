@@ -1,0 +1,4 @@
+
+        [console_scripts]
+        traceable-cli=traceable_cli:main
+    

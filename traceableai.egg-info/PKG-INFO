@@ -1,0 +1,17 @@
+Metadata-Version: 2.1
+Name: traceableai
+Version: 0.0.1
+Summary: Tool to install the Traceable Platform agent as well as the Traceable NGINX Agent
+Home-page: github.com/shloth/traceable-cli.git
+Author: Saad Farooq
+Author-email: saad@traceable.ai
+License: MIT
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
+UNKNOWN
+
