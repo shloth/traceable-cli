@@ -1,4 +1,6 @@
 import click
+from app import application
+
 
 @click.group()
 def cli():
@@ -9,6 +11,7 @@ def cli():
 def install(agent):
     if(agent == 'nginx'):
         print('installing nginx agent') # will replace with nginx_install() from application.py
+        application.nginx_install()
     elif(agent == 'platform'):
         print('installing platform agent') # will replace with platform_install() from application.py
     else:
