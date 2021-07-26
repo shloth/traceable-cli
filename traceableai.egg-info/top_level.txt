@@ -1,2 +1,2 @@
 app
-traceable-cli
+traceable_cli

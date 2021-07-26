@@ -13,7 +13,7 @@ setup(
     long_description = long_description,
     long_description_content_type = "text/markdown",
     url = 'github.com/shloth/traceable-cli.git',
-    py_modules = ['traceable-cli', 'app'],
+    py_modules = ['traceable_cli', 'app'],
     packages = find_packages(),
     install_requires = [requirements],
     python_requires='>=3.7',
@@ -23,6 +23,6 @@ setup(
     ],
     entry_points = '''
         [console_scripts]
-        traceable-cli=traceable_cli:main
+        traceable-cli=traceable_cli:cli
     '''
 )
