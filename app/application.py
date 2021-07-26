@@ -26,8 +26,6 @@ def nginx_install():
 
 #def platform_install():
 
-nginx_install()
-
 
 
 
