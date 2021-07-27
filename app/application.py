@@ -3,11 +3,16 @@ import os
 import requests
 import re
 
-
+# Version Details
 os_info = platform.platform()
-#nginx_v = os.system("nginx -v")
+nginx_v = os.system("nginx -v")
+
+# Cleanup nginx version
+nginx_v = re.search('AAA(.+?)', nginx_v)
+print(nginx_v)
 
 def nginx_install():
+    # DETECT Operating System
     if 'ubuntu' in os_info:
         print('Detected OS: Ubuntu')
     elif 'bionic' in os_info:
@@ -22,6 +27,7 @@ def nginx_install():
         print('Detected OS: Alpine Linux')
     else:
         print('Could not determine OS, please enter one of the following - use the corresponding number\n1-Ubuntu \n2-Centos\n3-Alpine')
+    # Confirm detected version of NGINX
 
 
 #def platform_install():
