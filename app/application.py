@@ -1,5 +1,5 @@
 import platform
-import sh
+import subprocess
 import requests
 import re
 
@@ -7,8 +7,10 @@ import re
 os_info = platform.platform()
 #nginx_v = os.system('nginx -v')
 # Cleanup nginx version
-nginx_v = sh.Command("nginx -v")
-nginx_raw_v = re.sub('\D', '', "f{nginx_v}")
+nginx_v = subprocess.run(
+    ["nginx", "-v"], stdout=subprocess.PIPE
+)
+nginx_raw_v = re.sub('\D', '', "f{nginx_v.stdout}")
 print(nginx_raw_v)
 
 def nginx_install():
