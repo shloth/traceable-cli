@@ -12,7 +12,7 @@ nginx_v = subprocess.run(
     ["nginx", "-v"],
 )
 nginx_raw_v = re.sub('\D', '', "f{nginx_v.stdout}")
-print(nginx_raw_v)
+#print(nginx_raw_v)
 
 def nginx_install():
     # DETECT Operating System
