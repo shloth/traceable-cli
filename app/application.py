@@ -7,7 +7,6 @@ import re
 # Version Details
 os_info = platform.platform()
 #nginx_v = os.system('nginx -v')
-print(nginx_v)
 # Cleanup nginx version
 nginx_v = subprocess.run(
     ["nginx", "-v"], capture_output=True, text=True
