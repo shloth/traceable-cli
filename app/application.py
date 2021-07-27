@@ -9,7 +9,7 @@ nginx_v = os.system("nginx -v")
 
 # Cleanup nginx version
 nginx_v = re.search('AAA(.+?)ZZZ', "f{nginx_v}")
-print(nginx_v.group(1))
+print(nginx_v)
 
 def nginx_install():
     # DETECT Operating System
