@@ -10,7 +10,7 @@ os_info = platform.platform()
 nginx_v = subprocess.run(
     ["nginx", "-v"], stdout=subprocess.PIPE
 )
-nginx_raw_v = re.sub('\D', '', "f{nginx_v.stdout}")
+nginx_raw_v = re.sub('\D', '', nginx_v)
 print(nginx_raw_v)
 
 def nginx_install():
