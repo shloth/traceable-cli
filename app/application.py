@@ -8,8 +8,8 @@ os_info = platform.platform()
 nginx_v = os.system('nginx -v')
 
 # Cleanup nginx version
-nginx_v = re.sub('\D', '', 'f{nginx_v}')
-print(nginx_v)
+nginx_raw_v = re.sub('\D', '', 'f{nginx_v}')
+print('f{nginx_raw_v}')
 
 def nginx_install():
     # DETECT Operating System
