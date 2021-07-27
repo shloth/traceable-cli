@@ -5,10 +5,10 @@ import re
 
 # Version Details
 os_info = platform.platform()
-nginx_v = os.system("nginx -v")
+nginx_v = os.system('nginx -v')
 
 # Cleanup nginx version
-nginx_v = re.search('AAA(.+?)ZZZ', "f{nginx_v}")
+nginx_v = re.sub('\D', 'f{nginx_v}')
 print(nginx_v)
 
 def nginx_install():
