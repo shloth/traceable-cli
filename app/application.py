@@ -8,8 +8,8 @@ import re
 os_info = platform.platform()
 #nginx_v = os.system('nginx -v')
 # Cleanup nginx version
-nginx_v = subprocess.run(
-    ["nginx", "-v"], stdout=PIPE
+nginx_v = subprocess.getoutput(
+    ["nginx -v"]
 )
 nginx_raw_v = re.sub('\D', '', "f{nginx_v}")
 print(nginx_raw_v)
