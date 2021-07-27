@@ -1,13 +1,17 @@
 import platform
-import os
+import subprocess
+import sys
 import requests
 import re
 
 # Version Details
 os_info = platform.platform()
-nginx_v = os.system('nginx -v')
-
+#nginx_v = os.system('nginx -v')
+print(nginx_v)
 # Cleanup nginx version
+nginx_v = subprocess.run(
+    ["nginx", "-v"], capture_output=True, text=True
+)
 nginx_raw_v = re.sub('\D', '', nginx_v)
 print(nginx_raw_v)
 
