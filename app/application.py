@@ -9,7 +9,7 @@ nginx_v = os.system('nginx -v')
 
 # Cleanup nginx version
 nginx_raw_v = re.sub('\D', '', 'f{nginx_v}')
-print('f{nginx_raw_v}')
+print(nginx_raw_v)
 
 def nginx_install():
     # DETECT Operating System
