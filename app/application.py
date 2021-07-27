@@ -24,13 +24,9 @@ def nginx_install():
     if 'ubuntu' in os_info:
         print('Detected OS: Ubuntu')
         os = 'linux'
-        r = requests.get(url, allow_redirects=True)
-        open('{}-x86_64-nginx-{}-ngx_http_module.so.tgz'.format(os, nginx_raw_v), 'wb').write(r.content)
     elif 'bionic' in os_info:
         print('Detected OS: Ubuntu-Bionic installation')
         os = 'linux'
-        r = requests.get(url, allow_redirects=True)
-        open('{}-x86_64-nginx-{}-ngx_http_module.so.tgz'.format(os, nginx_raw_v), 'wb').write(r.content)
     elif 'focal' in os_info:
         print('Detected OS: Ubuntu-Focal')
         os = 'linux'
@@ -46,7 +42,8 @@ def nginx_install():
     else:
         print('Could not determine OS, please enter one of the following - use the corresponding number\n1-Ubuntu \n2-Centos\n3-Alpine')
     # Confirm detected version of NGINX
-
+    r = requests.get(url, allow_redirects=True)
+    open('{}-x86_64-nginx-{}-ngx_http_module.so.tgz'.format(os, nginx_raw_v), 'wb').write(r.content)
 
 #def platform_install():
 
