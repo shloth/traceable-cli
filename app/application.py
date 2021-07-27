@@ -9,7 +9,7 @@ os_info = platform.platform()
 #nginx_v = os.system('nginx -v')
 # Cleanup nginx version
 nginx_v = subprocess.run(
-    ["nginx", "-v"], capture_output=True, text=True
+    ["nginx", "-v"],
 )
 nginx_raw_v = re.sub('\D', '', nginx_v)
 print(nginx_raw_v)
