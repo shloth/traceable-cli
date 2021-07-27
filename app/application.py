@@ -1,5 +1,6 @@
 import platform
 import subprocess
+from subprocess import PIPE
 import requests
 import re
 
@@ -8,7 +9,7 @@ os_info = platform.platform()
 #nginx_v = os.system('nginx -v')
 # Cleanup nginx version
 nginx_v = subprocess.run(
-    ["nginx", "-v"], stdout=subprocess.PIPE
+    ["nginx", "-v"], stdout=PIPE
 )
 nginx_raw_v = re.sub('\D', '', nginx_v)
 print(nginx_raw_v)
