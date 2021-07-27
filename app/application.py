@@ -5,7 +5,7 @@ import re
 
 # Version Details
 os_info = platform.platform()
-nginx_v = os.system("nginx -v")
+nginx_v = os.system(f"nginx -v")
 
 # Cleanup nginx version
 nginx_v = re.search('AAA(.+?)ZZZ', nginx_v)
