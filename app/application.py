@@ -17,8 +17,6 @@ nginx_raw_v = re.sub('[^\d\.]', '', nginx_v)
 
 def nginx_install():
     # BASELINE URL WITH EMBEDDED VARS
-    os = ''
-    url = 'https://downloads.traceable.ai/agent/nginx/latest/{}-x86_64-nginx-{}-ngx_http_module.so.tgz'.format(os, nginx_raw_v)
 
     # DETECT Operating System and use Nginx Version to download correct tar.gz
     if 'ubuntu' in os_info:
@@ -38,10 +36,11 @@ def nginx_install():
         os = 'linux'
     elif 'virthardened' in os_info:
         print('Detected OS: Alpine Linux')
-        os = 'linux'
+        os = 'alpine-3.9'
     else:
         print('Could not determine OS, please enter one of the following - use the corresponding number\n1-Ubuntu \n2-Centos\n3-Alpine')
     # Confirm detected version of NGINX
+    url = 'https://downloads.traceable.ai/agent/nginx/latest/{}-x86_64-nginx-{}-ngx_http_module.so.tgz'.format(os, nginx_raw_v)
     r = requests.get(url, allow_redirects=True)
     open('{}-x86_64-nginx-{}-ngx_http_module.so.tgz'.format(os, nginx_raw_v), 'wb').write(r.content)
     print(os)
