@@ -1,6 +1,7 @@
 import platform
 import subprocess
 from subprocess import PIPE
+import shutil, glob
 import requests
 import re
 
@@ -64,7 +65,9 @@ def nginx_install():
     pwd = subprocess.getoutput("pwd")
     # Move extracted .so files to nginx modules_path
     print(path)
-    subprocess.run(["cp", "{}/*.so".format(pwd), "{}/".format(path)], shell=True)
+    #subprocess.run(["cp", "{}/*.so".format(pwd), "{}/".format(path)], shell=True)
+    for file in glob.glob('{}/*so'):
+        shutil.copy(file, path)
     subprocess.getoutput("ls -la {}".format(path))
 #def platform_install():
 
