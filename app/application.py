@@ -20,7 +20,7 @@ def nginx_install():
         ["nginx -V"]
     )
 
-    nginx_modpath = re.search(r'(?<=--module-path=)[^.\s]*',nginx_details)
+    nginx_modpath = re.search(r'(?<=--module-path=)[^\s]*',nginx_details)
     print(nginx_modpath)
 
     # Find if --with-compat flag is present
@@ -59,7 +59,7 @@ def nginx_install():
     open('{}-x86_64-nginx-{}-ngx_http_module.so.tgz'.format(os, nginx_raw_v), 'wb').write(r.content)
     file_name = '{}-x86_64-nginx-{}-ngx_http_module.so.tgz'.format(os, nginx_raw_v)
     extracted_files = subprocess.getoutput(["tar", "-xvzf", file_name])
-    print(extracted_files)
+    
     #subprocess.run(["mv", ])
 #def platform_install():
 
