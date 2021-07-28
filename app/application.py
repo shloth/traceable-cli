@@ -11,13 +11,24 @@ nginx_v = subprocess.getoutput(
     ["nginx -v"]
 )
 
-
 # NGINX Version to be used in download URL
 nginx_raw_v = re.sub('[^\d\.]', '', nginx_v)
 
 def nginx_install():
-    # BASELINE URL WITH EMBEDDED VARS
+    # Get Modules path and --with-compat info
+    nginx_details = subprocess.getoutput(
+        ["nginx -V"]
+    )
 
+    nginx_modpath = re.search(r'(?<=test :)[^.\s]*',nginx_details)
+    print(nginx_modpath)
+
+    # Find if --with-compat flag is present
+    if "--with-compat" in nginx_details:
+        print('Detected "--with-compat" flag proceeding with installation')
+    else:
+        print('"--with-compat" flag not detected aborting installation')
+        exit
     # DETECT Operating System and use Nginx Version to download correct tar.gz
     if 'ubuntu' in os_info:
         print('Detected OS: Ubuntu')
@@ -40,11 +51,16 @@ def nginx_install():
     else:
         print('Could not determine OS, please enter one of the following - use the corresponding number\n1-Ubuntu \n2-Centos\n3-Alpine')
     # Confirm detected version of NGINX
+    
+    
+    # Use gathered info to download correct tgz file
     url = 'https://downloads.traceable.ai/agent/nginx/latest/{}-x86_64-nginx-{}-ngx_http_module.so.tgz'.format(os, nginx_raw_v)
     r = requests.get(url, allow_redirects=True)
     open('{}-x86_64-nginx-{}-ngx_http_module.so.tgz'.format(os, nginx_raw_v), 'wb').write(r.content)
     file_name = '{}-x86_64-nginx-{}-ngx_http_module.so.tgz'.format(os, nginx_raw_v)
-    subprocess.run(["tar", "-xvzf", file_name])
+    extracted_files = subprocess.getoutput(["tar", "-xvzf", file_name])
+    print(extracted_files)
+    #subprocess.run(["mv", ])
 #def platform_install():
 
 
