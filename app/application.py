@@ -21,7 +21,7 @@ def nginx_install():
     )
 
     nginx_modpath = re.search(r'(?<=--module-path=)[^\s]*',nginx_details)
-    #print(nginx_modpath)
+    print(nginx_modpath)
 
     # Find if --with-compat flag is present
     if "--with-compat" in nginx_details:
