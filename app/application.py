@@ -64,7 +64,7 @@ def nginx_install():
     pwd = subprocess.getoutput("pwd")
     # Move extracted .so files to nginx modules_path
     print(path)
-    subprocess.run(["cp", "{}/*.so".format(pwd), "".format(path)], shell=True)
+    subprocess.run(["cp", "-r", "{}/*.so".format(pwd), "{}/".format(path)], shell=True)
     subprocess.getoutput("ls -la {}".format(path))
 #def platform_install():
 
