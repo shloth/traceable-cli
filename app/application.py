@@ -66,7 +66,7 @@ def nginx_install():
     # Move extracted .so files to nginx modules_path
     print(path)
     #subprocess.run(["cp", "{}/*.so".format(pwd), "{}/".format(path)], shell=True)
-    for file in glob.glob('{}/*so*'):
+    for file in glob.glob('{}/*so*'.format(pwd)):
         shutil.copy(file, "{}/".format(path))
     subprocess.getoutput("ls -la {}".format(path))
 #def platform_install():
