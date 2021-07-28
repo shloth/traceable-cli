@@ -60,16 +60,16 @@ def nginx_install():
     r = requests.get(url, allow_redirects=True)
     open('{}-x86_64-nginx-{}-ngx_http_module.so.tgz'.format(os, nginx_raw_v), 'wb').write(r.content)
     file_name = '{}-x86_64-nginx-{}-ngx_http_module.so.tgz'.format(os, nginx_raw_v)
+    # Extract the downloaded tgz
     subprocess.run(["tar", "-xvzf", "{}".format(file_name)])
     subprocess.run(["rm", "-rf", "{}".format(file_name)])
     # Store pwd
     pwd = subprocess.getoutput("pwd")
     # Move extracted .so files to nginx modules_path
-    print(path)
-    #subprocess.run(["cp", "{}/*.so".format(pwd), "{}/".format(path)], shell=True)
     for file in glob.glob('{}/*so*'.format(pwd)):
         shutil.copy(file, "{}/".format(path))
-    subprocess.getoutput("ls -la {}".format(path))
+    # Get TPA hostname
+    tpa_hostname = input('Enter the host name for the Traceable Platform Agent: ')
 #def platform_install():
 
 
