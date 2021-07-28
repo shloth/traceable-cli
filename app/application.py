@@ -20,7 +20,7 @@ def nginx_install():
         ["nginx -V"]
     )
 
-    nginx_modpath = re.search(r'(?<=--modules-path=)[^\s]*',nginx_details)
+    nginx_modpath = re.search(r'(?<=--modules-path=)[^\s]*',nginx_details).group(1)
     #print(nginx_details)
     print(nginx_modpath)
 
