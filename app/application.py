@@ -61,7 +61,7 @@ def nginx_install():
     file_name = '{}-x86_64-nginx-{}-ngx_http_module.so.tgz'.format(os, nginx_raw_v)
     extract_files = subprocess.getoutput(["tar", "-xvzf", file_name])
     # Move extracted .so files to nginx modules_path
-    subprocess.run(["cp", "*.so", 'f{path}'])
+    subprocess.run(["cp", "./*.so", 'f{path}'])
     subprocess.getoutput("ls -la f{path}")
 #def platform_install():
 
