@@ -77,11 +77,14 @@ def nginx_install():
     subprocess.run(["rm", "-rf", "{}/*.so".format(pwd)])
     # Get TPA hostname
     tpa_hostname = input('Enter the host name for the Traceable Platform Agent: ')
+    service_name = input("Enter the name you'd like to use to identify this application/service: ")
     # edit nginx conf file
-     
+    nginx_conf = f"http {{\n\ttraceableai {{\n\t\tservice_name {service_name};\n\t\tcollector_host {tpa_hostname};\n\t\tcollector_port 9411;\n\t\tblocking on;\n\t\topa_server http://{tpa_hostname}:8181/;\n\t\topa_log_dir /tmp/;\n}}\n\topentracing on;\n\topentracing_propagate_context;"
     with fileinput.FileInput(conf_file, inplace=True, backup='.bak') as file:
         for line in file:
-            print(line.replace("http {", "http {\n\ttraceableai {\n\t\tservice_name nginx-YOUR-Service-name;\n\t\tcollector_host ;\n\t\tcollector_port 9411;\n\t\tblocking on;\n\t\topa_server http://hostname:8181/;\n\t\topa_log_dir /tmp/;\n}\n\topentracing on;\n\topentracing_propagate_context;"), end='')
+            print(line.replace("http {", nginx_conf), end='')
+            if 'user.+' in line:
+                line=line.replace(line,line+"load_module modules/ngx_http_traceableai_module.so;")
         fileinput.close()
 
 #def platform_install():
@@ -92,8 +95,8 @@ def nginx_install():
 
 
 # Use os_info variable to determine which link to use (below)
-# If contains UBUNTU | CENTOS | BIONIC | FOCAL | AMZN -- use LINUX link
-# If contains ALPINE | virthardened -- use Alpine link
+# If it contains UBUNTU | CENTOS | BIONIC | FOCAL | AMZN -- use LINUX link
+# If it contains ALPINE | virthardened -- use Alpine link
 
 
 # LINUX download from here
