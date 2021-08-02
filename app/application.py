@@ -81,6 +81,7 @@ def nginx_install():
     with fileinput.FileInput(conf_file, inplace=True, backup='.bak') as file:
         for line in file:
             print(line.replace("http {", "http {\n\ttraceableai {\n\t\tservice_name nginx-YOUR-Service-name;\n\t\tcollector_host ;\n\t\tcollector_port 9411;\n\t\tblocking on;\n\t\topa_server http://hostname:8181/;\n\t\topa_log_dir /tmp/;\n}\n\topentracing on;\n\topentracing_propagate_context;"), end='')
+        fileinput.close()
 
 #def platform_install():
 
