@@ -1,9 +1,11 @@
 import platform
+import fileinput
 import subprocess
 from subprocess import PIPE
 import shutil, glob
 import requests
 import re
+import readline
 
 # Version Details
 os_info = platform.platform()
@@ -22,6 +24,7 @@ def nginx_install():
     )
 
     nginx_modpath = re.search(r'(?<=--modules-path=)[^\s]*',nginx_details)
+    conf_file = re.search(r'(?<=--conf-path=)[^\s]*',nginx_details)
     #print(nginx_details)
     path = nginx_modpath.group(0)
 
@@ -68,8 +71,17 @@ def nginx_install():
     # Move extracted .so files to nginx modules_path
     for file in glob.glob('{}/*so*'.format(pwd)):
         shutil.copy(file, "{}/".format(path))
+    
+    # remove *.so files after copying
+    subprocess.run(["rm", "-rf", "{}/*.so".format(pwd)])
     # Get TPA hostname
     tpa_hostname = input('Enter the host name for the Traceable Platform Agent: ')
+    # edit nginx conf file
+     
+    with fileinput.FileInput(conf_file, inplace=True, backup='.bak') as file:
+        for line in file:
+            print(line.replace("http {", "http {\n\ttraceableai {\n\t\tservice_name nginx-YOUR-Service-name;\n\t\tcollector_host ;\n\t\tcollector_port 9411;\n\t\tblocking on;\n\t\topa_server http://hostname:8181/;\n\t\topa_log_dir /tmp/;\n}\n\topentracing on;\n\topentracing_propagate_context;"))
+
 #def platform_install():
 
 
