@@ -85,7 +85,7 @@ def nginx_install():
     with fileinput.FileInput(conf_file, inplace=True, backup='.bak') as file:
         for line in file:
             if re.match(user_regex, line):
-                line=line.replace(line,line+"load_module modules/ngx_http_traceableai_module.so;")
+                line=line.replace(line,line+"load_module modules/ngx_http_traceableai_module.so;\n")
             print(line.replace("http {", nginx_conf), end='')
         fileinput.close()
 
