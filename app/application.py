@@ -24,9 +24,10 @@ def nginx_install():
     )
 
     nginx_modpath = re.search(r'(?<=--modules-path=)[^\s]*',nginx_details)
-    conf_file = re.search(r'(?<=--conf-path=)[^\s]*',nginx_details)
+    nginx_confpath = re.search(r'(?<=--conf-path=)[^\s]*',nginx_details)
     #print(nginx_details)
-    path = nginx_modpath.group(0)
+    mod_path = nginx_modpath.group(0)
+    conf_file = nginx_confpath.group(0)
 
     # Find if --with-compat flag is present
     if "--with-compat" in nginx_details:
@@ -70,7 +71,7 @@ def nginx_install():
     pwd = subprocess.getoutput("pwd")
     # Move extracted .so files to nginx modules_path
     for file in glob.glob('{}/*so*'.format(pwd)):
-        shutil.copy(file, "{}/".format(path))
+        shutil.copy(file, "{}/".format(mod_path))
     
     # remove *.so files after copying
     subprocess.run(["rm", "-rf", "{}/*.so".format(pwd)])
