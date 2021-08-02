@@ -79,10 +79,12 @@ def nginx_install():
     tpa_hostname = input('Enter the host name for the Traceable Platform Agent: ')
     service_name = input("Enter the name you'd like to use to identify this application/service: ")
     # edit nginx conf file
+    user_regex = re.compile("user.+")
+
     nginx_conf = f"http {{\n\ttraceableai {{\n\t\tservice_name {service_name};\n\t\tcollector_host {tpa_hostname};\n\t\tcollector_port 9411;\n\t\tblocking on;\n\t\topa_server http://{tpa_hostname}:8181/;\n\t\topa_log_dir /tmp/;\n}}\n\topentracing on;\n\topentracing_propagate_context;"
     with fileinput.FileInput(conf_file, inplace=True, backup='.bak') as file:
         for line in file:
-            if 'user.+' in line:
+            if re.match(user_regex, line):
                 line=line.replace(line,line+"load_module modules/ngx_http_traceableai_module.so;")
             print(line.replace("http {", nginx_conf), end='')
         fileinput.close()
