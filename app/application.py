@@ -85,10 +85,10 @@ def nginx_install():
     nginx_conf = f"http {{\n\ttraceableai {{\n\t\tservice_name {service_name};\n\t\tcollector_host {tpa_hostname};\n\t\tcollector_port 9411;\n\t\tblocking on;\n\t\topa_server http://{tpa_hostname}:8181/;\n\t\topa_log_dir /tmp/;\n}}\n\topentracing on;\n\topentracing_propagate_context;"
     trace_regex = re.compile("traceable.+")
     with fileinput.FileInput(conf_file, inplace=True, backup='.bak') as file:
-        for line in file:
-            if re.match(trace_regex, line):
+        if re.match(trace_regex, file):
                 print("Traceble Plugin already configured in nginx.conf")
-            else:
+        else:
+            for line in file:
                 if re.match(user_regex, line):
                     line=line.replace(line,line+"load_module modules/ngx_http_traceableai_module.so;\n")
                 print(line.replace("http {", nginx_conf), end='')
