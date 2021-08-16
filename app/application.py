@@ -36,7 +36,7 @@ def nginx_install():
     if "--with-compat" in nginx_details:
         print('Detected "--with-compat" flag proceeding with installation')
     else:
-        print('"--with-compat" flag not detected aborting installation')
+        print('"--with-compat" flag not detected aborting installation, please re-install with --with-compat see https://docs.traceable.ai/install/ta/nginx/compiling-nginx')
         exit
     # DETECT Operating System and use Nginx Version to download correct tar.gz
     if 'ubuntu' in os_info:
