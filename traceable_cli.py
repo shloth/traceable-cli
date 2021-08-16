@@ -15,7 +15,7 @@ def install(agent):
     elif(agent == 'platform'):
         print('installing platform agent') # will replace with platform_install() from application.py
     else:
-        print('there was an error with CLI tool please reach out to Traceable support')
+        print('Please enter "nginx" as the value for agent')
 
 
 

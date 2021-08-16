@@ -4,7 +4,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 with open("requirements.txt", "r", encoding="utf-8") as fh:
     requirements = fh.read()
 setup(
-    name = 'traceableai',
+    name = 'traceable-cli',
     version = '0.0.1',
     author = 'Saad Farooq',
     author_email = 'saad@traceable.ai',
@@ -14,7 +14,7 @@ setup(
     long_description_content_type = "text/markdown",
     url = 'github.com/shloth/traceable-cli.git',
     py_modules = ['traceable_cli', 'app'],
-    packages = find_packages(),
+    packages = ['traceable-cli'],
     install_requires = [requirements],
     python_requires='>=3.7',
     classifiers=[
