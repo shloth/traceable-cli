@@ -5,7 +5,7 @@ with open("requirements.txt", "r", encoding="utf-8") as fh:
     requirements = fh.read()
 setup(
     name = 'traceable-cli',
-    version = '0.0.3',
+    version = '0.0.4',
     author = 'Saad Farooq',
     author_email = 'saad@traceable.ai',
     license = 'MIT',
