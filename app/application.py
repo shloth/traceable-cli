@@ -101,8 +101,8 @@ def nginx_install():
                         line=line.replace(line,line+"load_module modules/ngx_http_traceableai_module.so;\n")
                     print(line.replace("http {", nginx_conf), end='')
                 fileinput.close()
+                print("Traceable.ai NGINX Plugin succesfully configured, start sending data!")
     
-    print("Traceable.ai NGINX Plugin succesfully configured, start sending data!")
 
 #def platform_install():
 
