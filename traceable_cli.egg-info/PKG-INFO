@@ -1,13 +1,13 @@
 Metadata-Version: 2.1
 Name: traceable-cli
-Version: 0.0.4
+Version: 0.0.5
 Summary: Tool to install the Traceable Platform agent as well as the Traceable NGINX Agent
 Home-page: https://github.com/shloth/traceable-cli.git
 Author: Saad Farooq
 Author-email: saad@traceable.ai
 License: MIT
 Platform: UNKNOWN
-Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3
 Classifier: Operating System :: OS Independent
 Classifier: Intended Audience :: Developers
 Classifier: Topic :: Software Development :: Build Tools

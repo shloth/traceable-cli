@@ -26,6 +26,6 @@ setup(
     ],
     entry_points = '''
         [console_scripts]
-        traceable-cli=traceable_cli:cli
+        traceable-cli=cli:cli
     '''
 )
