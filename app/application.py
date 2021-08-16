@@ -91,7 +91,7 @@ def nginx_install():
         data = mmap.mmap(f.fileno(), 0)
         traceable_present = re.search(b'traceableai', data)
         if traceable_present: 
-            print ("Traceable already configured, aborting installation please check", nginx_conf)
+            print ("Traceable already configured, aborting installation please check", conf_file)
         else: 
             with fileinput.FileInput(conf_file, inplace=True, backup='.bak') as file:
                 for line in file:
