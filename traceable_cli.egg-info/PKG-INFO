@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: traceable-cli
-Version: 0.0.1
+Version: 0.0.2
 Summary: Tool to install the Traceable Platform agent as well as the Traceable NGINX Agent
 Home-page: https://github.com/shloth/traceable-cli.git
 Author: Saad Farooq
