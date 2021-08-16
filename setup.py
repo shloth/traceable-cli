@@ -12,14 +12,17 @@ setup(
     description = 'Tool to install the Traceable Platform agent as well as the Traceable NGINX Agent',
     long_description = long_description,
     long_description_content_type = "text/markdown",
-    url = 'github.com/shloth/traceable-cli.git',
+    url = 'https://github.com/shloth/traceable-cli.git',
     py_modules = ['traceable_cli', 'app'],
-    packages = ['traceable-cli'],
+    packages = find_packages(),
     install_requires = [requirements],
     python_requires='>=3.7',
     classifiers=[
         "Programming Language :: Python :: 3.8",
         "Operating System :: OS Independent",
+        "Intended Audience :: Developers",      
+        "Topic :: Software Development :: Build Tools",
+        "License :: OSI Approved :: MIT License",   
     ],
     entry_points = '''
         [console_scripts]
