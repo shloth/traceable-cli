@@ -10,7 +10,7 @@ def cli():
 @click.option('--agent', type=click.Choice(['nginx', 'platform'], case_sensitive=False))
 def install(agent):
     if(agent == 'nginx'):
-        print('installing nginx agent') # will replace with nginx_install() from application.py
+        print('Gathering required environment details to install Traceable NGINX plugin') # will replace with nginx_install() from application.py
         application.nginx_install()
     elif(agent == 'platform'):
         print('installing platform agent') # will replace with platform_install() from application.py

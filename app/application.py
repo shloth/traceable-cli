@@ -87,14 +87,14 @@ def nginx_install():
     
     # edit nginx conf file
     user_regex = re.compile("user.+") # To find where to insert "load_module"
-    nginx_conf = f"http {{\n\ttraceableai {{\n\t\tservice_name {service_name};\n\t\tcollector_host {tpa_hostname};\n\t\tcollector_port 9411;\n\t\tblocking on;\n\t\topa_server http://{tpa_hostname}:8181/;\n\t\topa_log_dir /tmp/;\n}}\n\topentracing on;\n\topentracing_propagate_context;"
+    nginx_conf = f"http {{\n\ttraceableai {{\n\t\tservice_name {service_name};\n\t\tcollector_host {tpa_hostname};\n\t\tcollector_port 9411;\n\t\tblocking on;\n\t\topa_server http://{tpa_hostname}:8181/;\n\t\topa_log_dir /tmp/;\n}}\n\topentracing on;\n\topentracing_propagate_context;\n\tblocking on;\n"
     trace_regex = re.compile("traceable.+")
 
     with open(conf_file, 'r+') as f:
         data = mmap.mmap(f.fileno(), 0)
         traceable_present = re.search(b'traceableai', data)
         if traceable_present: 
-            print ("Traceable already configured, aborting installation please check", conf_file)
+            print ("Traceable NGINX plugin already configured, aborting installation please check", conf_file)
         else: 
             with fileinput.FileInput(conf_file, inplace=True, backup='.bak') as file:
                 for line in file:
