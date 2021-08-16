@@ -91,14 +91,14 @@ def nginx_install():
         data = mmap.mmap(f.fileno(), 0)
         traceable_present = re.search(b'traceableai', data)
         if traceable_present: 
-            print ("found traceable config", traceable_present.group(0))
-
-    with fileinput.FileInput(conf_file, inplace=True, backup='.bak') as file:
-        for line in file:
-            if re.match(user_regex, line):
-                line=line.replace(line,line+"load_module modules/ngx_http_traceableai_module.so;\n")
-            print(line.replace("http {", nginx_conf), end='')
-        fileinput.close()
+            print ("Traceable already configured, aborting installation please check", nginx_conf)
+        else: 
+            with fileinput.FileInput(conf_file, inplace=True, backup='.bak') as file:
+                for line in file:
+                    if re.match(user_regex, line):
+                        line=line.replace(line,line+"load_module modules/ngx_http_traceableai_module.so;\n")
+                    print(line.replace("http {", nginx_conf), end='')
+                fileinput.close()
 
 #def platform_install():
 
