@@ -89,7 +89,7 @@ def nginx_install():
 
     with open(conf_file, 'r+') as f:
         data = mmap.mmap(f.fileno(), 0)
-        traceable_present = re.search(b'trace_regex', data)
+        traceable_present = re.search(trace_regex, data)
         if traceable_present: 
             print ("found traceable config", traceable_present.group(1))
 
