@@ -16,7 +16,7 @@ setup(
     py_modules = ['traceable_cli', 'app'],
     packages = find_packages(),
     install_requires = [requirements],
-    python_requires='>=3.7',
+    python_requires='>=3',
     classifiers=[
         "Programming Language :: Python :: 3.8",
         "Operating System :: OS Independent",
