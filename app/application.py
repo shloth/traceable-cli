@@ -91,7 +91,7 @@ def nginx_install():
         data = mmap.mmap(f.fileno(), 0)
         traceable_present = re.search(b'traceable', data)
         if traceable_present: 
-            print ("found traceable config", traceable_present.group(1))
+            print ("found traceable config", traceable_present.group(0))
 
     with fileinput.FileInput(conf_file, inplace=True, backup='.bak') as file:
         for line in file:
