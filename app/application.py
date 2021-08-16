@@ -25,7 +25,7 @@ def nginx_install():
 
     nginx_modpath = re.search(r'(?<=--modules-path=)[^\s]*',nginx_details)
     nginx_confpath = re.search(r'(?<=--conf-path=)[^\s]*',nginx_details)
-    #print(nginx_details)
+    
     mod_path = nginx_modpath.group(0)
     conf_file = nginx_confpath.group(0)
 
@@ -78,15 +78,20 @@ def nginx_install():
     # Get TPA hostname
     tpa_hostname = input('Enter the host name for the Traceable Platform Agent: ')
     service_name = input("Enter the name you'd like to use to identify this application/service: ")
+    
+    
     # edit nginx conf file
-    user_regex = re.compile("user.+")
-
+    user_regex = re.compile("user.+") # To find where to insert "load_module"
     nginx_conf = f"http {{\n\ttraceableai {{\n\t\tservice_name {service_name};\n\t\tcollector_host {tpa_hostname};\n\t\tcollector_port 9411;\n\t\tblocking on;\n\t\topa_server http://{tpa_hostname}:8181/;\n\t\topa_log_dir /tmp/;\n}}\n\topentracing on;\n\topentracing_propagate_context;"
+    trace_regex = re.compile("traceable.+")
     with fileinput.FileInput(conf_file, inplace=True, backup='.bak') as file:
         for line in file:
-            if re.match(user_regex, line):
-                line=line.replace(line,line+"load_module modules/ngx_http_traceableai_module.so;\n")
-            print(line.replace("http {", nginx_conf), end='')
+            if re.match(trace_regex, line):
+                print("Traceble Plugin already configured in nginx.conf")
+            else:
+                if re.match(user_regex, line):
+                    line=line.replace(line,line+"load_module modules/ngx_http_traceableai_module.so;\n")
+                print(line.replace("http {", nginx_conf), end='')
         fileinput.close()
 
 #def platform_install():
