@@ -1,6 +1,5 @@
 import click
-from app import application
-
+from . import application
 
 @click.group()
 def cli():

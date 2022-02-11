@@ -10,6 +10,7 @@ import readline
 
 # Version Details
 os_info = platform.platform()
+print(f'{ os_info }')
 # Cleanup nginx version
 nginx_v = subprocess.getoutput(
     ["nginx -v"]
@@ -105,7 +106,28 @@ def nginx_install():
                 print("Traceable.ai NGINX Plugin succesfully configured, start sending data!")
     
 
-#def platform_install():
+def platform_install():
+    if 'ubuntu' in os_info:
+        print('Detected OS: Ubuntu')
+        os = 'linux'
+    elif 'bionic' in os_info:
+        print('Detected OS: Ubuntu-Bionic installation')
+        os = 'linux'
+    elif 'focal' in os_info:
+        print('Detected OS: Ubuntu-Focal')
+        os = 'linux'
+    elif 'amzn' in os_info:
+        print('Detected OS: Amazon Linux')
+        os = 'linux'
+    elif 'centos' in os_info:
+        print('Detected OS: CentOS')
+        os = 'linux'
+    elif 'virthardened' in os_info:
+        print('Detected OS: Alpine Linux')
+        os = 'alpine-3.9'
+    else:
+        print('Could not determine OS, please enter one of the following - use the corresponding number\n1-Ubuntu \n2-Centos\n3-Alpine')
+    # Confirm detect
 
 
 
